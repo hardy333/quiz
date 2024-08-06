@@ -1,0 +1,41 @@
+.quiz-buttons-container {
+  margin: 20px 0;
+  display: flex;
+
+  justify-content: end;
+}
+
+.btn {
+  border: none;
+  border-radius: var(--border-radius);
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 0.6rem 1.2rem;
+  font-size: 14px;
+
+  font-weight: 600;
+  color: var(--color-text-white);
+
+  background-color: var(--color-primary);
+  line-height: 22.4px;
+  justify-content: center;
+
+  cursor: pointer;
+  letter-spacing: normal;
+}
+
+.btn:hover {
+  filter: brightness(110%);
+}
+
+.btn-success {
+  background-color: var(--color-success);
+}
+
+.btn:disabled {
+  cursor: default;
+  opacity: 0.7;
+}

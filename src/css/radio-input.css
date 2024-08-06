@@ -1,0 +1,61 @@
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label {
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  line-height: 20px;
+  display: inline-block;
+
+  margin: 0px 0;
+  padding-left: 45px !important;
+
+  --left-offset: 15px;
+}
+
+/* Outer Big Circle */
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+  content: "";
+  position: absolute;
+  left: var(--left-offset);
+  top: 50%;
+  transform: translate(0, -50%);
+  width: 20px;
+  height: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 100%;
+  background: #fff;
+}
+
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+  content: "";
+  width: 14px;
+  height: 14px;
+  background: var(--color-primary);
+  position: absolute;
+  top: calc(50%);
+  /* left: 4px; */
+  left: calc(var(--left-offset) + 4px);
+
+  transform: translate(0, -50%) scale(0);
+
+  border-radius: 100%;
+  transition: all 0.2s ease;
+}
+
+/* [type="radio"]:not(:checked) + label:after {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: 
+} */
+[type="radio"]:checked + label:after {
+  opacity: 1;
+  transform: translate(0, -50%) scale(1);
+}

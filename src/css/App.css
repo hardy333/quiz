@@ -1,0 +1,43 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-primary: #754ffe;
+  --color-success: #38a169;
+  --color-danger: #dc2626;
+  --color-secondary: #64748b;
+
+  --color-border: #e2e8f0;
+
+  /* From most light to dark, (higher number at the end means more dark) */
+  --color-bg-1: #fff;
+  --color-bg-2: #f1f5f9;
+
+  /* From Most dark to light, (higher number at the end means more light  */
+  --color-text-1: #1e293b;
+  --color-text-2: #64748b;
+
+  --color-text-black: black;
+  --color-text-white: white;
+
+  --border-radius: 8px;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+
+  background-color: var(--color-bg-2);
+}
+
+.container {
+  width: 1200px;
+  max-width: 100%;
+  margin: auto;
+}
+
+label:focus {
+  outline: 1px dashed red !important;
+}
