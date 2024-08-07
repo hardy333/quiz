@@ -77,6 +77,9 @@ export type Option = {
 -Type values are crucial for quiz rendering and logic. If they are not provided in JSON, the quiz component will fail.
 -Options and correct answer(s) are included; the number of options and correct answers is not limited in the case of a multiple-choice question.
 
+Every question can also have an optional navigation array. This array manages conditional rendering of the next question based on the user's current question answers.
+
+
   ## Aditional features
   - Json viewer
   - Quiz result viewer, after completing it. (quiz remembers and keeps trak of every answerd question cronologically)
@@ -92,3 +95,4 @@ export type Option = {
 - [ ] Optimize the Preview Component render.
 - [ ] Improve TypeScript types so that the as keyword is not needed.
 - [ ] Think about how is it possible to break quiz rendedring logic and hot to handle different kind of errors
+- [ ] Integrate Ai to Automatically Generate Quiz Json and create card for it 
