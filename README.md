@@ -1,5 +1,6 @@
 [Live](https://quiz-7wqv-git-master-hardy333s-projects.vercel.app/)
 
+![Website preview](https://github.com/hardy333/quiz/blob/master/preview.png)
 ## Used Technologies 
 - React
 - Typescript
