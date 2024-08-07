@@ -19,15 +19,17 @@ const QuizQuestionInfo = ({
           ? numberOfCompletedQuestions + 1
           : numberOfQuestions}
       </h5>
-      {/* <img
-        src="https://www.imgacademy.com/sites/default/files/img-academy-boarding-school-worlds-most-dedicated.jpg"
-        className="question-img"
-        alt=""
-      /> */}
+      {currQuestion.image && (
+        <img src={currQuestion.image} className="question-img" alt="" />
+      )}
 
-      {/* <h2 className="question-title">Lorem, ipsum dolor.</h2> */}
+      {currQuestion.title && (
+        <h2 className="question-title">{currQuestion.title}</h2>
+      )}
       <h3 className="question-text">{currQuestion?.question}</h3>
-      {/* <p className="question-description">Lorem ipsum dolor sit amet.</p> */}
+      {currQuestion.description && (
+        <p className="question-description">{currQuestion.description}</p>
+      )}
     </section>
   );
 };

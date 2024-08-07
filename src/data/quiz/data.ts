@@ -15,6 +15,9 @@ export type Navigation = {
 export type BaseQuestion = {
   id: number;
   type: string;
+  title?: string;
+  description?: string;
+  image?: string;
   question: string;
   navigation?: Navigation;
 };
