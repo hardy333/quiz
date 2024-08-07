@@ -30,7 +30,7 @@ const QuizComponent = () => {
   ) as Question;
   const numberOfQuestions = quiz.questions.length;
   const isLastQuestion = numberOfCompletedQuestions === numberOfQuestions - 1;
-  const questionMode: QuestionMode = currQuestion.type;
+  // const questionMode: QuestionMode = currQuestion.type;
   // DErived Stated
 
   /***************** Input States ***********************/

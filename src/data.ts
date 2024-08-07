@@ -172,19 +172,25 @@ export type BaseQuestion = {
   question: string;
 };
 
-type OneChoiceQuestion = BaseQuestion & {
+type OneChoiceQuestion = {
+  id: number;
+  question: string;
   type: "one-choice";
   options: Option[];
   correctAnswer: string;
 };
 
-export type MultipleChoiceQuestion = BaseQuestion & {
+export type MultipleChoiceQuestion = {
+  id: number;
+  question: string;
   type: "multiple-choice";
   options: Option[];
   correctAnswers: string[];
 };
 
-type InputQuestion = BaseQuestion & {
+type InputQuestion = {
+  id: number;
+  question: string;
   type: "input";
   correctAnswer: string;
 };
@@ -193,6 +199,11 @@ export type Option = {
   id: string;
   text: string;
 };
+
+// const obj: Question = {
+//   type: "multiple-choice",
+//   correctAnswer: "fdf"
+// }
 
 export const quiz2: { quiz: Quiz } = {
   quiz: {

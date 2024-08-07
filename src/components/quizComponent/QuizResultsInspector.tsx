@@ -1,4 +1,3 @@
-import { BaseQuestion, MultipleChoiceQuestion } from "../../data";
 import { AnswerdQuesgions } from "./QuizComponent";
 import QuizQuestionInfo from "./QuizQuestionInfo";
 
@@ -12,10 +11,28 @@ const QuizResultsInspector = ({ answeredQuestions }: Props) => {
       {answeredQuestions.map((currQuestion, index) => {
         let renderOptions = null;
 
+        let correctAnswer = "";
+
+        if (currQuestion.question.type === "one-choice") {
+          const c = currQuestion.question.correctAnswer;
+          correctAnswer = currQuestion.question.options.find(
+            (opt) => opt.id === c
+          )?.text;
+        } else if (currQuestion.question.type === "multiple-choice") {
+          const options = currQuestion.question.options;
+          correctAnswer = currQuestion.question.correctAnswers.reduce(
+            (res, answer) =>
+              (res += options.find((x) => x.id === answer).text + ",  "),
+            ""
+          );
+        }
+
+        console.log(correctAnswer);
+
         // Single ------------------------------------------------
         if (currQuestion.question.type === "one-choice") {
           renderOptions = (
-            <div className="question-inspector-container">
+            <div className="question-inspector-container" key={index}>
               <section className="answers-container">
                 {currQuestion?.question.options.map((option) => {
                   console.log(
@@ -53,24 +70,14 @@ const QuizResultsInspector = ({ answeredQuestions }: Props) => {
               {currQuestion.wasAnswerCorrect ? null : (
                 <p>
                   Correct Answer was:
-                  <strong>
-                    {" "}
-                    {
-                      currQuestion.question.options.find(
-                        (opt) =>
-                          opt.id ===
-                          (currQuestion as AnswerdQuesgions[0]).question
-                            ?.correctAnswer
-                      )?.text
-                    }
-                  </strong>
+                  <strong> {correctAnswer}</strong>
                 </p>
               )}
             </div>
           ); // Multy  ------------------------------------------------
         } else if (currQuestion.question.type === "multiple-choice") {
           renderOptions = (
-            <div className="question-inspector-container">
+            <div className="question-inspector-container" key={index}>
               <section className="answers-container">
                 {currQuestion?.question.options.map((option) => {
                   return (
@@ -96,24 +103,14 @@ const QuizResultsInspector = ({ answeredQuestions }: Props) => {
               </section>
               {currQuestion.wasAnswerCorrect ? null : (
                 <p>
-                  Correct Answers was:{" "}
-                  <strong>
-                    {currQuestion.question.correctAnswers.reduce(
-                      (res, answer) =>
-                        (res +=
-                          currQuestion.question?.options?.find(
-                            (x) => x.id === answer
-                          ).text + ",  "),
-                      ""
-                    )}
-                  </strong>
+                  Correct Answers was: <strong>{correctAnswer}</strong>
                 </p>
               )}
             </div>
           ); // Input  ------------------------------------------------
         } else if (currQuestion.question.type === "input") {
           renderOptions = (
-            <div className="question-inspector-container">
+            <div className="question-inspector-container" key={index}>
               <section
                 className="answers-container"
                 style={{ padding: "20px ", minHeight: 200 }}
