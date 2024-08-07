@@ -39,9 +39,9 @@ const QuizEndScreen = ({ quiz, answeredQuestions }: Props) => {
           <button className="btn" onClick={() => navigate("/")}>
             Back to home
           </button>
-          <button className="btn" onClick={() => window.location.reload()}>
+          {/* <button className="btn" onClick={() => navigate("./")}>
             Try Again
-          </button>
+          </button> */}
         </>
       )}
     </div>
