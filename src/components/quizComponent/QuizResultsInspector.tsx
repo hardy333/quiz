@@ -1,72 +1,162 @@
-import { Fragment } from "react/jsx-runtime";
-import { QuizData } from "../../data";
-import { CompletedQuestions } from "./QuizComponent";
+import { BaseQuestion, MultipleChoiceQuestion } from "../../data";
+import { AnswerdQuesgions } from "./QuizComponent";
+import QuizQuestionInfo from "./QuizQuestionInfo";
 
 type Props = {
-  quiz: QuizData;
-  completedQuestions: CompletedQuestions;
+  answeredQuestions: AnswerdQuesgions;
 };
 
-const QuizResultsInspector = ({ quiz, completedQuestions }: Props) => {
+const QuizResultsInspector = ({ answeredQuestions }: Props) => {
   return (
     <div>
-      {quiz.quiz.questions.map((q) => {
-        const completedQ = completedQuestions.find(
-          (completedQ) => completedQ.questionId === q.id
-        );
+      {answeredQuestions.map((currQuestion, index) => {
+        let renderOptions = null;
 
+        // Single ------------------------------------------------
+        if (currQuestion.question.type === "one-choice") {
+          renderOptions = (
+            <div className="question-inspector-container">
+              <section className="answers-container">
+                {currQuestion?.question.options.map((option) => {
+                  console.log(
+                    currQuestion.answer,
+                    option.id === currQuestion.answer
+                  );
+
+                  const inputId = `answer-radio-quiestion-${currQuestion.question.id}-option-${option.id}`;
+                  const inputName = `answer-radio-name-q-${currQuestion.question.id}`;
+
+                  return (
+                    <div
+                      className={`answer answer-radio ${
+                        option.id === currQuestion.answer
+                          ? currQuestion.wasAnswerCorrect
+                            ? "answer-correct"
+                            : "answer-incorrect"
+                          : ""
+                      }`}
+                      data-answer-id={option.id}
+                      key={currQuestion.question.id + option.id}
+                    >
+                      <input
+                        checked={option.id === currQuestion.answer}
+                        type="radio"
+                        name={inputName}
+                        id={inputId}
+                        readOnly
+                      />
+                      <label htmlFor={inputId}>{option.text}</label>
+                    </div>
+                  );
+                })}
+              </section>
+              {currQuestion.wasAnswerCorrect ? null : (
+                <p>
+                  Correct Answer was:
+                  <strong>
+                    {" "}
+                    {
+                      currQuestion.question.options.find(
+                        (opt) =>
+                          opt.id ===
+                          (currQuestion as AnswerdQuesgions[0]).question
+                            ?.correctAnswer
+                      )?.text
+                    }
+                  </strong>
+                </p>
+              )}
+            </div>
+          ); // Multy  ------------------------------------------------
+        } else if (currQuestion.question.type === "multiple-choice") {
+          renderOptions = (
+            <div className="question-inspector-container">
+              <section className="answers-container">
+                {currQuestion?.question.options.map((option) => {
+                  return (
+                    <div
+                      className="answer answer-checkbox"
+                      data-answer-id={option.id}
+                      key={option.id}
+                    >
+                      <input
+                        checked={currQuestion.answer?.includes(option.id)}
+                        type="checkbox"
+                        id={currQuestion.question.id + "-" + option.id}
+                        readOnly
+                      />
+                      <label
+                        htmlFor={currQuestion.question.id + "-" + option.id}
+                      >
+                        {option.text}
+                      </label>
+                    </div>
+                  );
+                })}
+              </section>
+              {currQuestion.wasAnswerCorrect ? null : (
+                <p>
+                  Correct Answers was:{" "}
+                  <strong>
+                    {currQuestion.question.correctAnswers.reduce(
+                      (res, answer) =>
+                        (res +=
+                          currQuestion.question?.options?.find(
+                            (x) => x.id === answer
+                          ).text + ",  "),
+                      ""
+                    )}
+                  </strong>
+                </p>
+              )}
+            </div>
+          ); // Input  ------------------------------------------------
+        } else if (currQuestion.question.type === "input") {
+          renderOptions = (
+            <div className="question-inspector-container">
+              <section
+                className="answers-container"
+                style={{ padding: "20px ", minHeight: 200 }}
+              >
+                <div className="input-container">
+                  <label htmlFor="" className="lable">
+                    Submited Answer
+                  </label>
+                  <input
+                    value={currQuestion.answer as string}
+                    style={{ width: "100%" }}
+                    type="text"
+                    className={`input ${
+                      currQuestion.wasAnswerCorrect
+                        ? "input-success"
+                        : "input-danger"
+                    }`}
+                    placeholder="Your Answer is?"
+                    readOnly
+                  />
+                </div>
+              </section>
+              {currQuestion.wasAnswerCorrect ? null : (
+                <p>
+                  Correct Answer was:{" "}
+                  <strong>{currQuestion.question?.correctAnswer}</strong>
+                </p>
+              )}
+            </div>
+          );
+        } else {
+          renderOptions = <p>Invalid Question Type, Please try another quiz</p>;
+        }
         return (
-          <Fragment key={q.id}>
-            {/* Info */}
-            <section className="question-info">
-              <h2>{q?.question}</h2>
-            </section>
+          <div>
+            <QuizQuestionInfo
+              numberOfCompletedQuestions={index}
+              currQuestion={currQuestion.question}
+              numberOfQuestions={answeredQuestions.length}
+            />
 
-            {/* Answers */}
-            <section className="answers-container">
-              {/* 1 */}
-              {q.answers.map((ans) => {
-                const checked = ans.id === completedQ?.answerId;
-
-                let classN = "";
-
-                if (completedQ?.answerId === ans.id) {
-                  classN = completedQ?.wasAnswerCorrect
-                    ? "answer-correct"
-                    : "answer-incorrect  ";
-                }
-
-                return (
-                  <div
-                    className={`answer answer-radio ${classN}`}
-                    data-answer-id={ans.id}
-                    key={ans.id}
-                  >
-                    <input
-                      type="radio"
-                      id={"ans" + ans.id}
-                      name={"radio-group" + q.id}
-                      checked={checked}
-                    />
-                    <label htmlFor={"ans" + ans.id}>{ans.answer}</label>
-                  </div>
-                );
-              })}
-            </section>
-            <p
-              style={{
-                fontSize: "14px",
-                margin: "10px 0",
-                display: completedQ?.wasAnswerCorrect ? "none" : "block",
-              }}
-            >
-              Correct answer was:
-              <span style={{ color: "var(--color-success)" }}>
-                {" "}
-                {q.answers.find((ans) => ans.is_correct)?.answer}{" "}
-              </span>
-            </p>
-          </Fragment>
+            {renderOptions}
+          </div>
         );
       })}
     </div>

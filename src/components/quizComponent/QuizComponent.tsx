@@ -5,13 +5,14 @@ import QuizHeader from "./QuizHeader";
 import QuizProgress from "./QuizProgress";
 import QuizQuestionInfo from "./QuizQuestionInfo";
 import QuizOptions from "./QuizOptions";
+import QuizEndScreen from "./QuizEndScreen";
 
 export type QuestionMode = "one-choice" | "multiple-choice" | "input";
 
-export type CompletedQuestions = {
-  questionId: string | number;
-  answerId: string | number;
+export type AnswerdQuesgions = {
   wasAnswerCorrect: boolean;
+  question: Question;
+  answer: string | string[] | null;
 }[];
 
 const QuizComponent = () => {
@@ -41,6 +42,39 @@ const QuizComponent = () => {
   >(null);
   const [inputAnswer, setInputAnswer] = useState("");
   /***************** Input States ***********************/
+
+  const [answeredQuestions, setAnsweredQuestions] = useState<AnswerdQuesgions>(
+    []
+  );
+
+  const udpateAnsweredQuestions = () => {
+    let wasCorrect = false;
+    let answer = null;
+
+    if (currQuestion.type === "one-choice") {
+      wasCorrect = selectedSingleAnswerId === currQuestion.correctAnswer;
+      answer = selectedSingleAnswerId;
+    } else if (currQuestion.type === "multiple-choice") {
+      wasCorrect =
+        selectedMultyAnswerIds?.sort().join("") ===
+        currQuestion.correctAnswers.sort().join("");
+      answer = selectedMultyAnswerIds;
+    } else {
+      wasCorrect = inputAnswer === currQuestion.correctAnswer;
+      answer = inputAnswer;
+    }
+
+    setAnsweredQuestions([
+      ...answeredQuestions,
+      {
+        wasAnswerCorrect: wasCorrect,
+        answer,
+        question: currQuestion,
+      },
+    ]);
+  };
+
+  console.log("answered q", answeredQuestions);
 
   // const [completedQuestions, setCompletedQuestions] =
   //   useState<CompletedQuestions>([]);
@@ -78,21 +112,25 @@ const QuizComponent = () => {
     if (isLastQuestion) {
       return;
     }
+    udpateAnsweredQuestions();
     setNumberOfQompletedQuestions(numberOfCompletedQuestions + 1);
     setCurrQuestionId(quiz.questions[numberOfCompletedQuestions + 1].id);
 
-    resetSelectedAnswers();
     // manageQuestionSubmit();
+    resetSelectedAnswers();
   };
 
   const endQuiz = () => {
     // manageQuestionSubmit();
+    udpateAnsweredQuestions();
     setIsQuizFinished(true);
   };
 
   return (
     <>
-      {isQuizFinished ? null : ( // <QuizEndScreen quiz={quiz} completedQuestions={completedQuestions} />
+      {isQuizFinished ? (
+        <QuizEndScreen quiz={quiz} answeredQuestions={answeredQuestions} /> // <QuizEndScreen quiz={quiz} completedQuestions={completedQuestions} />
+      ) : (
         <section className="quiz-container">
           {/* TOP */}
           <QuizHeader quizTitle={quiz.title} />

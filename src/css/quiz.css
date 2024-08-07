@@ -125,6 +125,14 @@
   border-radius: var(--border-radius);
 }
 
+.question-inspector-container {
+  margin: 20px 0;
+}
+
+.question-inspector-container p {
+  margin-top: 10px;
+}
+
 .answer {
   border-bottom: 1px solid var(--color-border);
   color: var(--color-text-2);
@@ -216,4 +224,14 @@
 .answer-correct [type="radio"]:not(:checked) + label:before {
   border: 1px solid var(--color-success);
   opacity: 0.2;
+}
+
+/* Readonly */
+
+input:read-only {
+  cursor: default !important;
+}
+
+input:read-only + label {
+  cursor: default !important;
 }

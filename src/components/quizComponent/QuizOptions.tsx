@@ -42,8 +42,6 @@ const QuizOptions = ({
     e: ChangeEvent<HTMLInputElement>,
     option: Option
   ) => {
-    console.log(e.target);
-    console.log(e.target.checked);
     // setSelectedSingleAnswerId(option.id);
     if (e.target.checked && selectedMultyAnswerIds) {
       setSelectedMultyAnswerIds([...selectedMultyAnswerIds, option.id]);
@@ -79,7 +77,6 @@ const QuizOptions = ({
 
   // Single ------------------------------------------------
   if (currQuestion.type === "one-choice") {
-    console.log("hello");
     renderOptions = (
       <section className="answers-container">
         {currQuestion?.options.map((option) => {
@@ -106,7 +103,6 @@ const QuizOptions = ({
     renderOptions = (
       <section className="answers-container">
         {currQuestion?.options.map((option) => {
-          console.log("ss", selectedMultyAnswerIds?.includes(option.id));
           return (
             <div
               className="answer answer-checkbox"

@@ -167,7 +167,7 @@ export type Question =
   | MultipleChoiceQuestion
   | InputQuestion;
 
-type BaseQuestion = {
+export type BaseQuestion = {
   id: number;
   question: string;
 };
@@ -178,7 +178,7 @@ type OneChoiceQuestion = BaseQuestion & {
   correctAnswer: string;
 };
 
-type MultipleChoiceQuestion = BaseQuestion & {
+export type MultipleChoiceQuestion = BaseQuestion & {
   type: "multiple-choice";
   options: Option[];
   correctAnswers: string[];
@@ -252,36 +252,36 @@ export const quiz2: { quiz: Quiz } = {
         ],
         correctAnswers: ["a", "b", "d"],
       },
-      {
-        id: 6,
-        type: "input",
-        question: "Who is known as the 'Father of Computers'?",
-        correctAnswer: "Charles Babbage",
-      },
-      {
-        id: 7,
-        type: "one-choice",
-        question: "What is the chemical symbol for gold?",
-        options: [
-          { id: "a", text: "Au" },
-          { id: "b", text: "Ag" },
-          { id: "c", text: "Pb" },
-          { id: "d", text: "Fe" },
-        ],
-        correctAnswer: "a",
-      },
-      {
-        id: 8,
-        type: "multiple-choice",
-        question: "Which of the following are elements?",
-        options: [
-          { id: "a", text: "Oxygen" },
-          { id: "b", text: "Water" },
-          { id: "c", text: "Nitrogen" },
-          { id: "d", text: "Carbon Dioxide" },
-        ],
-        correctAnswers: ["a", "c"],
-      },
+      // {
+      //   id: 6,
+      //   type: "input",
+      //   question: "Who is known as the 'Father of Computers'?",
+      //   correctAnswer: "Charles Babbage",
+      // },
+      // {
+      //   id: 7,
+      //   type: "one-choice",
+      //   question: "What is the chemical symbol for gold?",
+      //   options: [
+      //     { id: "a", text: "Au" },
+      //     { id: "b", text: "Ag" },
+      //     { id: "c", text: "Pb" },
+      //     { id: "d", text: "Fe" },
+      //   ],
+      //   correctAnswer: "a",
+      // },
+      // {
+      //   id: 8,
+      //   type: "multiple-choice",
+      //   question: "Which of the following are elements?",
+      //   options: [
+      //     { id: "a", text: "Oxygen" },
+      //     { id: "b", text: "Water" },
+      //     { id: "c", text: "Nitrogen" },
+      //     { id: "d", text: "Carbon Dioxide" },
+      //   ],
+      //   correctAnswers: ["a", "c"],
+      // },
     ],
   },
 };

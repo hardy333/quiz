@@ -16,6 +16,11 @@ const App = () => {
       <div className="container">
         <Navbar />
 
+        <input type="checkbox" checked readOnly />
+
+        {/* <input type="radio" id="x" disabled checked />
+        <label htmlFor="x"></label> */}
+
         <RoutesComponent />
       </div>
     </>
