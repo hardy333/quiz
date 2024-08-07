@@ -6,6 +6,7 @@ import QuizProgress from "./QuizProgress";
 import QuizQuestionInfo from "./QuizQuestionInfo";
 import QuizOptions from "./QuizOptions";
 import QuizEndScreen from "./QuizEndScreen";
+import { quiz4, quiz5, quiz6, quiz7 } from "../../quiz4";
 
 export type QuestionMode = "one-choice" | "multiple-choice" | "input";
 
@@ -16,7 +17,7 @@ export type AnswerdQuesgions = {
 }[];
 
 const QuizComponent = () => {
-  const [quiz] = useState<Quiz>(quiz3);
+  const [quiz] = useState<Quiz>(quiz7);
 
   const [isQuizFinished, setIsQuizFinished] = useState(false);
   const [numberOfCompletedQuestions, setNumberOfQompletedQuestions] =
