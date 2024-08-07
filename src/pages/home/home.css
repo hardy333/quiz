@@ -33,3 +33,9 @@
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
 }
+
+.quiz-card footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+}
