@@ -5,6 +5,8 @@
 - Typescript
 - React-router-dom
 - Vite
+
+  
 <small>No libraries used for quiz logic and animations</small>
 
 
@@ -13,6 +15,6 @@
 - npm i
 - npm run dev
 
-If you want to build the project
-- 1. npm run build
-- 2. npm run dev
+#### If you want to build the project
+1. npm run build
+2. npm run dev
