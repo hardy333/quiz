@@ -73,9 +73,9 @@ export type Option = {
 ## Small Description of quiz renderer component
 - Quiz consists of a title and questions.
 - Every question can have optional title, description, and image properties which render on the page based on their existence.
-= (Important) Every question needs a type attribute; there are three types: 1) "multiple-choice", 2) "one-choice", 3) "input".
--Type values are crucial for quiz rendering and logic. If they are not provided in JSON, the quiz component will fail.
--Options and correct answer(s) are included; the number of options and correct answers is not limited in the case of a multiple-choice question.
+- (Important) Every question needs a type attribute; there are three types: 1) "multiple-choice", 2) "one-choice", 3) "input".
+- Type values are crucial for quiz rendering and logic. If they are not provided in JSON, the quiz component will fail.
+- Options and correct answer(s) are included; the number of options and correct answers is not limited in the case of a multiple-choice question.
 
 Every question can also have an optional navigation array. This array manages conditional rendering of the next question based on the user's current question answers.
 Quiz logic also prevents two different questions from being cycled if their navigation objects point to each other.
