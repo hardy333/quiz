@@ -2,8 +2,8 @@ import "./quiz-end-screen.css";
 import { AnswerdQuesgions } from "./QuizComponent";
 import { useState } from "react";
 import QuizResultsInspector from "./QuizResultsInspector";
-import { Quiz } from "../../data";
 import { useNavigate } from "react-router-dom";
+import { Quiz } from "../../data/quiz/data";
 
 type Props = {
   quiz: Quiz;

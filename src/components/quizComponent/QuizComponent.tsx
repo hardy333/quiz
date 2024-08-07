@@ -1,12 +1,11 @@
 import { IoArrowRedo } from "react-icons/io5";
-import { Question, Quiz, quiz2, quiz3 } from "../../data/quiz/quizzes";
 import { useState } from "react";
 import QuizHeader from "./QuizHeader";
 import QuizProgress from "./QuizProgress";
 import QuizQuestionInfo from "./QuizQuestionInfo";
 import QuizOptions from "./QuizOptions";
 import QuizEndScreen from "./QuizEndScreen";
-import { quiz4, quiz5, quiz6, quiz7 } from "../../data/quiz/quizzes";
+import { Question, Quiz } from "../../data/quiz/data";
 
 export type QuestionMode = "one-choice" | "multiple-choice" | "input";
 

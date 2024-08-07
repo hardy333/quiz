@@ -1,4 +1,4 @@
-import { Question } from "../../data";
+import { Question } from "../../data/quiz/data";
 
 type Props = {
   numberOfCompletedQuestions: number;
