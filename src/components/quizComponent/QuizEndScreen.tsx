@@ -3,6 +3,7 @@ import { AnswerdQuesgions } from "./QuizComponent";
 import { useState } from "react";
 import QuizResultsInspector from "./QuizResultsInspector";
 import { Quiz } from "../../data";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   quiz: Quiz;
@@ -10,6 +11,7 @@ type Props = {
 };
 const QuizEndScreen = ({ quiz, answeredQuestions }: Props) => {
   const [showReview, setShowReview] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="quiz-end-container">
@@ -24,11 +26,23 @@ const QuizEndScreen = ({ quiz, answeredQuestions }: Props) => {
         )}
       </p>
 
-      <button className="btn" onClick={() => setShowReview(true)}>
-        Show review
-      </button>
+      {!showReview && (
+        <button className="btn" onClick={() => setShowReview(true)}>
+          Show review
+        </button>
+      )}
       {showReview && (
         <QuizResultsInspector answeredQuestions={answeredQuestions} />
+      )}
+      {showReview && (
+        <>
+          <button className="btn" onClick={() => navigate("/")}>
+            Back to home
+          </button>
+          <button className="btn" onClick={() => window.location.reload()}>
+            Try Again
+          </button>
+        </>
       )}
     </div>
   );

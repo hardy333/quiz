@@ -8,13 +8,12 @@ import "./css/input.css";
 
 // Components
 import RoutesComponent from "./routes/RoutesComponent.tsx";
-import Navbar from "./components/navbar/Navbar.tsx";
 
 const App = () => {
   return (
     <>
       <div className="container">
-        <Navbar />
+        {/* <Navbar /> */}
         <RoutesComponent />
       </div>
     </>

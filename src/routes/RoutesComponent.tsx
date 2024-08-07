@@ -1,12 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "../pages/Home";
-import Quiz from "../pages/Quiz";
+import Quiz from "../pages/quiz/Quiz";
+import Home from "../pages/home/Home";
 
 const RoutesComponent = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/quiz" element={<Quiz />} />
+      <Route path="/quiz/:quizIndex" element={<Quiz />} />
     </Routes>
   );
 };
