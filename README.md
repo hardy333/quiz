@@ -70,3 +70,23 @@ export type Option = {
 };
 
 ```
+## Small Description of quiz renderer component
+- Quiz Consists of title and questions
+- Every question can have optional title, description and img propertios which render on the page based on they exist or not
+- !!! (Important) every question needs type atribute, there three types. 1) "multiple-choice", 2) "one-choice" 3) "input";
+- Types values are very important in quiz rendering and working logic, if they are not provided in json, quiz component will fail.
+- Obviously we have options and correct answer(s), number of options is not limited and number of correct answers is not limited if kase of multy choice question
+
+  ## Aditional features
+  -- Json viewer
+  -- Quiz result viewer, after completing it. (quiz remembers and keeps trak of every answerd question cronologically)
+  -- Timer
+  -- Quiz Result preview
+
+## ToDo
+[x] Use Css Modules and create Components with them such es buttons inputs and so on
+[x] create additional pages for Quiz end screen and quiz result preview page
+[x] Use Context Api for quiz data management (for switching quizes)
+[x] Clean Up Quiz Component code, revirete them in custom hooks 
+[x] Preview Component render optimization
+  
