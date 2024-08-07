@@ -1,5 +1,5 @@
 import { ChangeEvent, Dispatch, useEffect } from "react";
-import { Question } from "../../data";
+import { Question } from "../../data/quiz/data";
 
 type Props = {
   currQuestion: Question;
