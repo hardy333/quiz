@@ -6,7 +6,7 @@ import { quizArr } from "../../data/quiz/quizzArr";
 const Quiz = () => {
   const params = useParams();
 
-  const quiz = quizArr[params.quizIndex];
+  const quiz = quizArr[params.quizIndex].quiz;
 
   return (
     <>
