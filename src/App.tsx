@@ -6,7 +6,7 @@ import "./css/quiz.css";
 import "./css/button.css";
 import "./css/input.css";
 
-// Data
+// Components
 import RoutesComponent from "./routes/RoutesComponent.tsx";
 import Navbar from "./components/navbar/Navbar.tsx";
 
@@ -15,12 +15,6 @@ const App = () => {
     <>
       <div className="container">
         <Navbar />
-
-        <input type="checkbox" checked readOnly />
-
-        {/* <input type="radio" id="x" disabled checked />
-        <label htmlFor="x"></label> */}
-
         <RoutesComponent />
       </div>
     </>

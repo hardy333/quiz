@@ -1,5 +1,5 @@
 import { IoArrowRedo } from "react-icons/io5";
-import { Question, Quiz, quiz2 } from "../../data";
+import { Question, Quiz, quiz2, quiz3 } from "../../data";
 import { useState } from "react";
 import QuizHeader from "./QuizHeader";
 import QuizProgress from "./QuizProgress";
@@ -16,7 +16,7 @@ export type AnswerdQuesgions = {
 }[];
 
 const QuizComponent = () => {
-  const [quiz] = useState<Quiz>(quiz2.quiz);
+  const [quiz] = useState<Quiz>(quiz3);
 
   const [isQuizFinished, setIsQuizFinished] = useState(false);
   const [numberOfCompletedQuestions, setNumberOfQompletedQuestions] =
@@ -46,6 +46,9 @@ const QuizComponent = () => {
   const [answeredQuestions, setAnsweredQuestions] = useState<AnswerdQuesgions>(
     []
   );
+  const [unUnsweredQuestions, setUnUnsweredQuestions] = useState(
+    quiz.questions
+  );
 
   const udpateAnsweredQuestions = () => {
     let wasCorrect = false;
@@ -74,32 +77,13 @@ const QuizComponent = () => {
     ]);
   };
 
-  console.log("answered q", answeredQuestions);
+  const updateUnAnswerdQuestions = () => {
+    setUnUnsweredQuestions((arr) =>
+      arr.filter((q) => q.id !== currQuestion.id)
+    );
+  };
 
-  // const [completedQuestions, setCompletedQuestions] =
-  //   useState<CompletedQuestions>([]);
-
-  // Methods ************************************************
-  // Methods ************************************************
-
-  // 1) stores answerd option in array 2) resetes selected unswer
-  // const manageQuestionSubmit = () => {
-  //   const wasAnswerCorrect =
-  //     currQuestion.answers.find((ans) => ans.is_correct)?.id ===
-  //     selectedAnswerId;
-
-  //   setCompletedQuestions([
-  //     ...completedQuestions,
-  //     {
-  //       questionId: currQuestionId,
-
-  //       answerId: selectedAnswerId as string | number,
-  //       wasAnswerCorrect: wasAnswerCorrect,
-  //     },
-  //   ]);
-
-  //   setSelectedAnswerId(null);
-  // };
+  console.log("answered q", unUnsweredQuestions);
 
   const resetSelectedAnswers = () => {
     setSelectedMultyAnswerIds(null);
@@ -108,21 +92,95 @@ const QuizComponent = () => {
     setButtonDisabled(true);
   };
 
+  // Navigation
+  // Navigation
+  const showNextQuestionWithoutNavigation = () => {
+    setCurrQuestionId(
+      // filter itself out
+      unUnsweredQuestions.filter((q) => q.id !== currQuestion.id)[0].id
+    );
+  };
+
+  const setNextQuestion = () => {
+    setNumberOfQompletedQuestions(numberOfCompletedQuestions + 1);
+
+    if (!currQuestion.navigation) {
+      showNextQuestionWithoutNavigation();
+      return;
+    }
+
+    let nextQuestionId = null;
+
+    // one-choice
+    if (currQuestion.type === "one-choice") {
+      const foundId = currQuestion.navigation[selectedSingleAnswerId];
+
+      console.log({ foundId });
+      if (foundId) {
+        nextQuestionId = foundId;
+      } else if (currQuestion.navigation.default) {
+        nextQuestionId = currQuestion.navigation.default;
+      }
+    }
+
+    // two-choice
+    if (currQuestion.type === "multiple-choice") {
+      const foundId = currQuestion.navigation[selectedMultyAnswerIds.join("")];
+
+      if (foundId) {
+        nextQuestionId = foundId;
+      } else if (currQuestion.navigation.default) {
+        nextQuestionId = currQuestion.navigation.default;
+      }
+    }
+
+    // input type
+    if (currQuestion.type === "input") {
+      const foundId = currQuestion.navigation[inputAnswer];
+
+      if (foundId) {
+        nextQuestionId = foundId;
+      } else if (currQuestion.navigation.default) {
+        nextQuestionId = currQuestion.navigation.default;
+      }
+    }
+
+    if (nextQuestionId) {
+      const wasAlredyAsked = answeredQuestions.find(
+        (q) => q.question.id === nextQuestionId
+      );
+      if (wasAlredyAsked) {
+        showNextQuestionWithoutNavigation();
+      } else {
+        setCurrQuestionId(nextQuestionId);
+      }
+    } else {
+      showNextQuestionWithoutNavigation();
+    }
+  };
+
   const showNextQuestion = () => {
     if (isLastQuestion) {
       return;
     }
-    udpateAnsweredQuestions();
-    setNumberOfQompletedQuestions(numberOfCompletedQuestions + 1);
-    setCurrQuestionId(quiz.questions[numberOfCompletedQuestions + 1].id);
 
-    // manageQuestionSubmit();
+    //  Update Answers arrays
+    udpateAnsweredQuestions();
+    updateUnAnswerdQuestions();
+
+    // Next Question Logic
+    setNextQuestion();
+
+    // Rest inputs for next question
     resetSelectedAnswers();
   };
 
   const endQuiz = () => {
-    // manageQuestionSubmit();
+    //  Update Answers arrays
     udpateAnsweredQuestions();
+    updateUnAnswerdQuestions();
+
+    // End Quiz
     setIsQuizFinished(true);
   };
 
