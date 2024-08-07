@@ -84,9 +84,11 @@ export type Option = {
   - Quiz Result preview
 
 ## ToDo
-- [x] Use CSS Modules and create components with them, such as buttons, inputs, and so on.
-- [x] Create additional pages for the quiz end screen and quiz result preview page.
-- [x] Use Context API for quiz data management (for switching quizzes).
-- [x] Clean up Quiz Component code; rewrite them in custom hooks.
-- [x] Optimize the Preview Component render.
-- [x] Improve TypeScript types so that the as keyword is not needed.
+- [ ] Css Cleanup
+- [ ] Use CSS Modules and create components with them, such as buttons, inputs, and so on.
+- [ ] Create additional pages for the quiz end screen and quiz result preview page.
+- [ ] Use Context API for quiz data management (for switching quizzes).
+- [ ] Clean up Quiz Component code; rewrite them in custom hooks.
+- [ ] Optimize the Preview Component render.
+- [ ] Improve TypeScript types so that the as keyword is not needed.
+- [ ] Think about how is it possible to break quiz rendedring logic and hot to handle different kind of errors
