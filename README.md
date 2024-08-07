@@ -78,7 +78,7 @@ export type Option = {
 -Options and correct answer(s) are included; the number of options and correct answers is not limited in the case of a multiple-choice question.
 
 Every question can also have an optional navigation array. This array manages conditional rendering of the next question based on the user's current question answers.
-
+Quiz logic also prevents two different questions from being cycled if their navigation objects point to each other.
 
   ## Aditional features
   - Json viewer
