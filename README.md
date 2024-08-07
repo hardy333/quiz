@@ -95,4 +95,6 @@ Every question can also have an optional navigation array. This array manages co
 - [ ] Optimize the Preview Component render.
 - [ ] Improve TypeScript types so that the as keyword is not needed.
 - [ ] Think about how is it possible to break quiz rendedring logic and hot to handle different kind of errors
-- [ ] Integrate Ai to Automatically Generate Quiz Json and create card for it 
+- [ ] Integrate Ai to Automatically Generate Quiz Json and create card for it
+- [ ] Lazy loading images in Quiz, and preventing layout Shifts, blur animation
+- [ ] Ui improvments in Home and preview pages 
